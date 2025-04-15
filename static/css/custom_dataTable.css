@@ -1,0 +1,12 @@
+th {
+    color: rgb(4, 251, 29);
+}
+/* Pagination button styles */
+#studentTable_paginate a {
+    background-color: black !important;
+    color: white !important;
+}
+
+.page-item.active .page-link {
+    border-color: rgb(4, 251, 29) !important;
+}
