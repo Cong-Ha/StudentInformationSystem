@@ -1,0 +1,14 @@
+<div class="row g-3 mb-3">
+    <div class="col-md-4">
+        <label class="form-label text-dark">Name:</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter your name" value="{{ student.name if student else '' }}">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label text-dark">Email:</label>
+        <input type="text" class="form-control" name="email" placeholder="Enter your email" value="{{ student.email if student else '' }}">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label text-dark">Program:</label>
+        <input type="text" class="form-control" name="program" placeholder="Enter academic program" value="{{ student.program if student else '' }}">
+    </div>
+</div>
