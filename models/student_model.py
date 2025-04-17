@@ -17,3 +17,5 @@ def add_student(student_data):
     student_data["enrollment_date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return collection.insert_one(student_data)
 
+def update_student(student_id, data):
+    return collection.update_one({ "_id": ObjectId(student_id)}, {"$set": data})
