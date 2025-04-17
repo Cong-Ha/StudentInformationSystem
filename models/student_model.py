@@ -19,3 +19,6 @@ def add_student(student_data):
 
 def update_student(student_id, data):
     return collection.update_one({ "_id": ObjectId(student_id)}, {"$set": data})
+
+def delete_student(student_id):
+    return collection.delete_one({"_id": ObjectId(student_id)})
