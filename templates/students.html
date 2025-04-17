@@ -86,13 +86,30 @@
     <div class="modal fade" id="editModal{{student._id}}" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="post" action="/update/{{student._id}}">
+                <form method="POST" action="/update/{{ student._id }}">
                     <div class="modal-header">
                         <h5 class="modal-title text-dark">Edit Customer</h5>
                         <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+                        {% if errors and validation_target_id == student._id|string %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-4">
+                            <label class="form-label text-dark">Student Id:</label>
+                            <input type="text" class="form-control" name="id" value="{{ student._id }}" disabled>
+                        </div>
                         {% include 'form_fields.html' %}
+                        <div class="col-md-4">
+                            <label class="form-label text-dark">Enrollment Date:</label>
+                            <input type="date" class="form-control" name="enrollment_date" value="{{ student.enrollment_date[:10] if student else '' }}">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -140,6 +157,13 @@
     {
         {% if errors and not student %}
         let modal = new bootstrap.Modal(document.getElementById("addStudentModal"));
+        modal.show();
+        {% endif %}
+    }
+    window.onload = function()
+    {
+        {% if errors and validation_target_id == student._id|string %}
+        let modal = new bootstrap.Modal(document.getElementById("editModal{{student._id}}"));
         modal.show();
         {% endif %}
     }
