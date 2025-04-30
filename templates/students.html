@@ -32,7 +32,7 @@
 <div class="modal fade {% if errors and not student %}show{% endif %}" id="addStudentModal" tab-index="-1" aria-labelledby="addStudentModalLabel" aria-hidden="{% if errors and not student %}false{% else %}true{% endif %}"style="{% if errors and not student %}display:block; background:rgba(0,0,0,0.5); {% endif %}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="post" action="/add_student">
+            <form method="post" action="/add_student" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title text-dark" id="AddStudentModalLabel">Add Student</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -86,7 +86,7 @@
     <div class="modal fade" id="editModal{{student._id}}" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="/update/{{ student._id }}">
+                <form method="POST" action="/update/{{ student._id }}" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title text-dark">Edit Customer</h5>
                         <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
@@ -126,6 +126,7 @@
 <table id="studentTable" class="table table-bordered table-dark table-hover">
     <thead>
         <tr>
+            <th>Image</th>
             <th>Student Id</th>
             <th>Name</th>
             <th>Email</th>
@@ -137,6 +138,13 @@
     <tbody>
     {% for student in students %}
         <tr>
+            <td>
+                {% if student.image_id %}
+                <img src="/image/{{ student.image_id }}" width="95">
+                {% else %}
+                NO IMAGE
+                {% endif %}
+            </td>
             <td>{{student._id}}</td>
             <td>{{student.name}}</td>
             <td>{{student.email}}</td>
